@@ -38,7 +38,7 @@ abstract class Model extends Data
         return $this;
     }
 
-    public function prewhere(array $array)
+    public function prewhere(...$array)
     {
 
         $this->query->where($array);

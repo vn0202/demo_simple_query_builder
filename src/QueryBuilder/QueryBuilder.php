@@ -19,6 +19,7 @@ class QueryBuilder
     private $orderBy = "";
     private $limit = "";
     private $join = "";
+    private  $para = [];
 
 
     public function __construct(string $table)
@@ -35,7 +36,7 @@ class QueryBuilder
         return $static;
     }
 
-    public function where(...$array)
+    public function where(array $array)
     {
         if (empty($this->where)) {
             $this->where = " WHERE ";
@@ -43,8 +44,18 @@ class QueryBuilder
             $this->where .= " AND ";
         }
         foreach ($array as $arr) {
-            $this->where .= $arr[0] . " {$arr[1]} " . ":{$arr[0]}" . " AND ";
-            $this->whereCondition[$arr[0]] = $arr[2];
+            $key = $arr[0];
+            $key = $arr[0].'1';
+               if(!in_array($key,$this->para)){
+                  array_push($this->para,$key);
+               }
+               else{
+                   $key = changeKey($this->para,$key);
+                  array_push($this->para,$key);
+                   echo "Cos vafo day " . $key;
+               }
+            $this->where .= $arr[0] . " $arr[1] " . ":{$key}" . " AND ";
+            $this->whereCondition[$key] = $arr[2];
         }
         $this->where = substr($this->where, 0, -5);
         return $this;
@@ -249,7 +260,7 @@ class QueryBuilder
 
     public function getPrepareString()
     {
-        return $this->prepare . $this->where;
+        return $this->prepare . $this->where ;
     }
 
 
