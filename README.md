@@ -30,6 +30,11 @@ $config = [
 Connection::$config = $config;
 
 ```
+**Có thể sử dụng trực tiếp QueryBuilder**
+
+  ```php 
+   DB::table('tbl_admin')->where(['id','=',20])->get();
+  ```
 
 - Trong thư mục `src\Model`, thêm các file model có cấu trúc như sau:
 
@@ -69,7 +74,7 @@ class TblAdmin extends Model{
 
    ```php 
    $test = TblAdmin::where(['id','>',20])->where(['email','=','nghiavuxp0202@gmail.com'])->get();
-   or $test = TblAdmin::where(['id','>',20],['email','=','nghiavuxp0202@gmail.com])->get();
+   or $test = TblAdmin::where(['id','>',20],['email','=','nghiavuxp0202@gmail.com'])->get();
    
    ```
    - Sắp xếp gía trị trả về: 
@@ -86,7 +91,7 @@ class TblAdmin extends Model{
      $test = TblAdmin::rightjoin('tbl_product',['tbl_product.creator','=','tbl_admin.id'])
                    ->where(['id','>',20])
                    ->get();
-    $test = TblAdmin::lefttjoin('tbl_product',['tbl_product.creator','=','tbl_admin.id'])
+     $test = TblAdmin::lefttjoin('tbl_product',['tbl_product.creator','=','tbl_admin.id'])
                    ->where(['id','>',20])
                    ->get();
 
@@ -127,12 +132,7 @@ TblAdmin::insert($data)
 
    ```
 
- **Có thể sử dụng trực tiếp QueryBuilder**  
-
-  ```php 
-   DB::table('tbl_admin')->where(['id','=',20])->get();
-  ```
-
+ 
 
 ```php 
 
