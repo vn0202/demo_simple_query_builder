@@ -1,5 +1,8 @@
 <?php
 require  "../vendor/autoload.php";
+use Vannghia\SimpleQueryBuilder\Config\Connection;
+use Vannghia\SimpleQueryBuilder\QueryBuilder\QueryBuilder as DB;
+use Vannghia\SimpleQueryBuilder\Test\TblAdmin;
 
 $config = [
     'driver'=>'mysql',
@@ -8,7 +11,19 @@ $config = [
     'username'=>'root',
     'password'=>'root',
 ];
-\Vannghia\SimpleQueryBuilder\Config\Connection::$config = $config;
-$test = \Vannghia\SimpleQueryBuilder\Test\TblAdmin::get();
-$test2 = \Vannghia\SimpleQueryBuilder\Test\TblProduct::count();
-var_dump($test2);
+Connection::$config = $config;
+$data = [
+    'fullname'=>'vnpgroup',
+    'username'=>'VNPGROUP',
+    'password'=>md5('vnp'),
+    'email'=>'vnp@gmail.com',
+    'phone'=>123456789,
+    'address'=>'102 Thai Thinh',
+    'reg_date'=>time(),
+    'role'=>1,
+    'admin_intro'=>2,
+    ];
+
+
+$test =TblAdmin::where(['id','>',30])->count();
+print_r($test);

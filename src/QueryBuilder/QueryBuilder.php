@@ -17,13 +17,11 @@ class QueryBuilder
     private $whereCondition = [];
     private $prepare;
     private $orderBy = "";
-    private $operator = ['>', '>=', "<=", '<', '=', "!=", 'LIKE', 'NOT LIKE', 'IN', "NOT IN"];
-    private $logicOperator = ['AND', "OR"];
     private $limit = "";
     private $join = "";
 
 
-    public function __construct(string $table )
+    public function __construct(string $table)
     {
         $this->conn = Connection::connect();
         static::$table = $table;
@@ -33,16 +31,16 @@ class QueryBuilder
     {
         // TODO: Implement table() method.
         static::$table = $table;
-        $static = new static();
+        $static = new static($table);
         return $static;
     }
 
-    public function where(array $array, $logicOperator = "AND")
+    public function where(...$array)
     {
         if (empty($this->where)) {
             $this->where = " WHERE ";
         } else {
-            $this->where .= " {$logicOperator} ";
+            $this->where .= " AND ";
         }
         foreach ($array as $arr) {
             $this->where .= $arr[0] . " {$arr[1]} " . ":{$arr[0]}" . " AND ";
@@ -102,7 +100,7 @@ class QueryBuilder
         } catch (\PDOException $e) {
             echo $this->getPrepareString();
             echo " Have some errors";
-            file_put_contents('PDOErrors.txt', $e->getMessage() ." at ".date("d\m\Y H:m:s",time()) . "\n", FILE_APPEND);
+            file_put_contents('PDOErrors.txt', $e->getMessage() . " at " . date("d\m\Y H:m:s", time()) . "\n", FILE_APPEND);
         }
     }
 
@@ -121,23 +119,25 @@ class QueryBuilder
             return $run->fetch($flag);
         } catch (\PDOException $e) {
             echo "have some errors";
-            file_put_contents('PDOErrors.txt', $e->getMessage()  ." at ".date("d\m\Y H:m:s",time()) ."\n", FILE_APPEND);
+            file_put_contents('PDOErrors.txt', $e->getMessage() . " at " . date("d\m\Y H:m:s", time()) . "\n", FILE_APPEND);
         }
     }
 
-    public function insert(array $field, array $data)
+    public function insert(array $data)
     {
         try {
+            $field = array_keys($data);
+            $val = array_values($data);
             $stringField = implode(",", $field);
             $stringQuestionMark = str_repeat("?, ", count($field));
             $stringQuestionMark = substr($stringQuestionMark, 0, -2);
             $this->prepare = "INSERT INTO " . self::$table . " (" . $stringField . ")" . " values " . "(" . $stringQuestionMark . ")";
             $run = $this->conn->prepare($this->prepare);
-            $run = $run->execute($data);
+            $run = $run->execute($val);
             return true;
         } catch (\PDOException $e) {
             echo "ERROR! Co loi xay ra voi PDO";
-            file_put_contents('PDOErrors.txt', $e->getMessage() ." at ".date("d\m\Y H:m:s",time()) ."\n", FILE_APPEND);
+            file_put_contents('PDOErrors.txt', $e->getMessage() . " at " . date("d\m\Y H:m:s", time()) . "\n", FILE_APPEND);
         }
     }
 
@@ -161,7 +161,7 @@ class QueryBuilder
             }
             return true;
         } catch (\PDOException $e) {
-            file_put_contents('PDOErrors.txt', $e->getMessage() ." at ".date("d\m\Y H:m:s",time()) ."\n", FILE_APPEND);
+            file_put_contents('PDOErrors.txt', $e->getMessage() . " at " . date("d\m\Y H:m:s", time()) . "\n", FILE_APPEND);
             return false;
         }
     }
@@ -196,6 +196,7 @@ class QueryBuilder
             return false;
         }
     }
+
     public function count()
     {
         try {
@@ -235,18 +236,18 @@ class QueryBuilder
 
     public function find(array $search)
     {
-         try {
-             $key = array_keys($search)[0];
-             $run = $this->conn->prepare("SELECT * FROM " . self::$table . " WHERE  {$key} =:{$key} ");
-             $run->execute($search);
-             return $run->fetch(\PDO::FETCH_ASSOC);
-         }catch (\PDOException $e){
-             echo " have some errors";
-             file_put_contents('PDOErrors.txt', $e->getMessage() .' at time : '. date('d/m/Y -H:m:s',time()). "\n", FILE_APPEND);
-         }
+        try {
+            $key = array_keys($search)[0];
+            $run = $this->conn->prepare("SELECT * FROM " . self::$table . " WHERE  {$key} =:{$key} ");
+            $run->execute($search);
+            return $run->fetch(\PDO::FETCH_ASSOC);
+        } catch (\PDOException $e) {
+            echo " have some errors";
+            file_put_contents('PDOErrors.txt', $e->getMessage() . ' at time : ' . date('d/m/Y -H:m:s', time()) . "\n", FILE_APPEND);
+        }
     }
 
- public   function getPrepareString()
+    public function getPrepareString()
     {
         return $this->prepare . $this->where;
     }

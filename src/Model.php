@@ -93,8 +93,8 @@ abstract class Model extends Data
         return $this;
 
     }
-    public  function  preinsert(array $field, array $data){
-        $this->query->insert($field,$data);
+    public  function  preinsert( array $data){
+        $this->query->insert($data);
 
     }
     public  function preupdate(array $data)
@@ -114,7 +114,7 @@ abstract class Model extends Data
     public  function  precreate(array $array ){
         $keys = array_keys($array);
         $vals= array_values($array);
-        $this->query->insert($keys,$vals);
+        $this->query->insert($array);
 
 
     }

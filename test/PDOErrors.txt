@@ -1,3 +1,7 @@
 SQLSTATE[42S02]: Base table or view not found: 1146 Table 'app.tbl_admins' doesn't exist
 SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'NULL AND email != 'eada'' at line 1 at 04mY 08:10:21
 SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'NULL AND email <> 'eada'' at line 1 at 04mY 08:10:32
+SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens at 04mY 14:10:58
+SQLSTATE[HY093]: Invalid parameter number: parameter was not defined at 04mY 15:10:12
+SQLSTATE[HY093]: Invalid parameter number: parameter was not defined at 04mY 15:10:46
+SQLSTATE[42S22]: Column not found: 1054 Unknown column 'amdin_intro' in 'field list' at 04mY 15:10:22
