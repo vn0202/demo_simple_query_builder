@@ -1,9 +1,12 @@
 {
     "name": "vannghia/simple_query_builder",
     "description": "simple query builder",
+    "minimum-stability": "stable",
+    "license": "proprietary",
     "autoload": {
         "psr-4": {
-            "Vannghia\\SimpleQueryBuilder\\": "src/"
+            "Vannghia\\SimpleQueryBuilder\\": "src/",
+            "Vannghia\\SimpleQueryBuilder\\Test\\": "test/"
         }
     },
     "authors": [
