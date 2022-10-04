@@ -23,7 +23,5 @@ $data = [
     'role'=>1,
     'admin_intro'=>2,
     ];
-
-
-$test =TblAdmin::where(['id','>',30])->count();
+$test = TblAdmin::find(['id'=>1]);
 print_r($test);

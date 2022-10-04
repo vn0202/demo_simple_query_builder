@@ -5,3 +5,12 @@ SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not ma
 SQLSTATE[HY093]: Invalid parameter number: parameter was not defined at 04mY 15:10:12
 SQLSTATE[HY093]: Invalid parameter number: parameter was not defined at 04mY 15:10:46
 SQLSTATE[42S22]: Column not found: 1054 Unknown column 'amdin_intro' in 'field list' at 04mY 15:10:22
+SQLSTATE[42S22]: Column not found: 1054 Unknown column 'id1' in 'where clause' at 04mY 17:10:14
+SQLSTATE[42S22]: Column not found: 1054 Unknown column 'id1' in 'where clause' at 04mY 17:10:56
+SQLSTATE[HY093]: Invalid parameter number: parameter was not defined at 04mY 17:10:41
+SQLSTATE[HY093]: Invalid parameter number: parameter was not defined at 04mY 17:10:16
+SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens at 04mY 20:10:54
+SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'Array NULL' at line 1 at 04mY 22:10:15
+SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'NULL AND id < '30'' at line 1 at 04mY 22:10:10
+SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens at 04mY 22:10:17
+SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens at time : 04/10/2022 -22:10:46
