@@ -23,5 +23,6 @@ $data = [
     'role'=>1,
     'admin_intro'=>2,
     ];
-$test = TblAdmin::find(['id'=>1]);
-print_r($test);
+
+
+print_r(TblAdmin::where(['id','=',1])->get());
