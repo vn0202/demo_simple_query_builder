@@ -261,6 +261,20 @@ class QueryBuilder
     {
         return $this->prepare . $this->where ;
     }
+    public function truncate()
+    {
+        try {
+            $run = $this->conn->prepare("TRUNCATE TABLE ". self::$table);
+            $run->execute();
+            return true;
+        }
+        catch (\PDOException $e)
+        {
+            file_put_contents('PDOErrors.txt', $e->getMessage() . "\n", FILE_APPEND);
+            return false;
+        }
+
+    }
 
 
 }

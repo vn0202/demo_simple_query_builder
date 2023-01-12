@@ -118,5 +118,9 @@ abstract class Model extends Data
 
 
     }
+    public function pretruncate()
+    {
+        $this->query->truncate();
+    }
 
 }
