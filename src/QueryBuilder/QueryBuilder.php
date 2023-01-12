@@ -45,14 +45,13 @@ class QueryBuilder
         }
         foreach ($array as $arr) {
             $key = $arr[0];
-            $key = $arr[0].'1';
                if(!in_array($key,$this->para)){
                   array_push($this->para,$key);
                }
                else{
                    $key = changeKey($this->para,$key);
                   array_push($this->para,$key);
-                   echo "Cos vafo day " . $key;
+
                }
             $this->where .= $arr[0] . " $arr[1] " . ":{$key}" . " AND ";
             $this->whereCondition[$key] = $arr[2];
