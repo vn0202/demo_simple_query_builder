@@ -9,8 +9,9 @@ use Vannghia\SimpleQueryBuilder\Data;
 use Vannghia\SimpleQueryBuilder\Interfaces\IQueryBulider;
 
 class QueryBuilder
+
 {
-    private PDO $conn;
+    private ?PDO $conn = null;
 
     protected static $table = '';
     private $where = "";
@@ -24,7 +25,11 @@ class QueryBuilder
 
     public function __construct(string $table)
     {
-        $this->conn = Connection::connect();
+        if($this->conn === null)
+        {
+            $this->conn = Connection::connect();
+
+        }
         static::$table = $table;
     }
 
